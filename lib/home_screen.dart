@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (idx >= 0) _notes[idx] = updatedNote;
       });
       await _saveNotes();
-    } else {
+    } else if (updatedNote != null && updatedNote.toDelete == true) {
       await _deleteNote(note);
     }
   }
