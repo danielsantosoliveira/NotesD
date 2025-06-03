@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/note.dart';
 import 'note_edit_screen.dart';
@@ -97,12 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
     ).push<Note>(MaterialPageRoute(builder: (_) => NoteEditScreen(note: note)));
 
-    if (updatedNote != null) {
+    if (updatedNote != null && updatedNote.toDelete != true) {
       setState(() {
         final idx = _notes.indexWhere((n) => n.id == updatedNote.id);
         if (idx >= 0) _notes[idx] = updatedNote;
       });
       await _saveNotes();
+    } else {
+      await _deleteNote(note);
     }
   }
 
