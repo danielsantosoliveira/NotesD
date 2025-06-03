@@ -4,6 +4,7 @@ class Note {
   String description;
   DateTime createdAt;
   DateTime? updatedAt;
+  bool? toDelete;
 
   Note({
     required this.id,
@@ -11,6 +12,7 @@ class Note {
     required this.description,
     required this.createdAt,
     this.updatedAt,
+    this.toDelete
   });
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(

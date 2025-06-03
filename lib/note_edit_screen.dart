@@ -55,8 +55,15 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
   }
 
   void _deleteNote() {
-    // Confirmação antes de deletar
-    final confirm = showDialog(
+    final note = Note(
+      id: widget.note!.id,
+      title: "",
+      description: "",
+      createdAt: _createdAt,
+      toDelete: true
+    );
+
+    showDialog(
       context: context,
       builder: (_) => AlertDialog(
         title: Text('Deletar anotação'),
@@ -68,10 +75,10 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // fecha dialog
+              Navigator.of(context).pop();
               Navigator.of(
                 context,
-              ).pop(null); // retorna null para indicar exclusão
+              ).pop(note);
             },
             child: Text('Deletar', style: TextStyle(color: Colors.red)),
           ),
